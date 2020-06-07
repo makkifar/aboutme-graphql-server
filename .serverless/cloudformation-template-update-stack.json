@@ -59,7 +59,7 @@
     "GraphqlLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/apollo-lambda-dev-graphql"
+        "LogGroupName": "/aws/lambda/apollo-lambda-production-graphql"
       }
     },
     "IamRoleLambdaExecution": {
@@ -88,7 +88,7 @@
                 "-",
                 [
                   "apollo-lambda",
-                  "dev",
+                  "production",
                   "lambda"
                 ]
               ]
@@ -104,7 +104,7 @@
                   ],
                   "Resource": [
                     {
-                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/apollo-lambda-dev*:*"
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/apollo-lambda-production*:*"
                     }
                   ]
                 },
@@ -115,7 +115,7 @@
                   ],
                   "Resource": [
                     {
-                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/apollo-lambda-dev*:*:*"
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/apollo-lambda-production*:*:*"
                     }
                   ]
                 }
@@ -129,7 +129,7 @@
             "-",
             [
               "apollo-lambda",
-              "dev",
+              "production",
               {
                 "Ref": "AWS::Region"
               },
@@ -192,9 +192,9 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/apollo-lambda/dev/1591546661331-2020-06-07T16:17:41.331Z/apollo-lambda.zip"
+          "S3Key": "serverless/apollo-lambda/production/1591552182776-2020-06-07T17:49:42.776Z/apollo-lambda.zip"
         },
-        "FunctionName": "apollo-lambda-dev-graphql",
+        "FunctionName": "apollo-lambda-production-graphql",
         "Handler": "s_graphql.handler",
         "MemorySize": 1024,
         "Role": {
@@ -210,20 +210,20 @@
         "GraphqlLogGroup"
       ]
     },
-    "GraphqlLambdaVersionZChKucrKD9PaF0waDq68FoGwXoGdNuF2w7IHNvk74": {
+    "GraphqlLambdaVersionS8xbQdOEIKsdpufbjF9CveOIIk6WKdVYzm2hmZjc": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GraphqlLambdaFunction"
         },
-        "CodeSha256": "MiuutHreJ22KuMVTBWWUXDP46zr2Ce44YQukAGNG0L8="
+        "CodeSha256": "UzfdLcdQ6ArhhiBYpVNNZDLk3kwxg5W3zLVkTyrFDPg="
       }
     },
     "ApiGatewayRestApi": {
       "Type": "AWS::ApiGateway::RestApi",
       "Properties": {
-        "Name": "dev-apollo-lambda",
+        "Name": "production-apollo-lambda",
         "EndpointConfiguration": {
           "Types": [
             "EDGE"
@@ -378,13 +378,13 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1591546628766": {
+    "ApiGatewayDeployment1591552144919": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
         },
-        "StageName": "dev"
+        "StageName": "production"
       },
       "DependsOn": [
         "ApiGatewayMethodGraphqlOptions",
@@ -432,7 +432,7 @@
     "ApiGatewayLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/api-gateway/apollo-lambda-dev"
+        "LogGroupName": "/aws/api-gateway/apollo-lambda-production"
       }
     },
     "CustomApiGatewayAccountCloudWatchRole": {
@@ -472,7 +472,7 @@
               "Fn::Join": [
                 "-",
                 [
-                  "dev",
+                  "production",
                   "apollo-lambda",
                   "custom-resources-lambda"
                 ]
@@ -538,9 +538,9 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/apollo-lambda/dev/1591546661331-2020-06-07T16:17:41.331Z/custom-resources.zip"
+          "S3Key": "serverless/apollo-lambda/production/1591552182776-2020-06-07T17:49:42.776Z/custom-resources.zip"
         },
-        "FunctionName": "apollo-lambda-dev-custom-resource-apigw-cw-role",
+        "FunctionName": "apollo-lambda-production-custom-resource-apigw-cw-role",
         "Handler": "apiGatewayCloudWatchRole/handler.handler",
         "MemorySize": 1024,
         "Runtime": "nodejs12.x",
@@ -559,7 +559,7 @@
     "CloudWatchLogsSubscriptionFilterGraphqlLogGroup": {
       "Type": "AWS::Logs::SubscriptionFilter",
       "Properties": {
-        "DestinationArn": "arn:aws:logs:us-east-1:802587217904:destination:JvN1BxTcm1PsgZt5qd#BwJkbtglSw03r79MnR#apollo-lambda#dev",
+        "DestinationArn": "arn:aws:logs:eu-central-1:802587217904:destination:JvN1BxTcm1PsgZt5qd#BwJkbtglSw03r79MnR#apollo-lambda#production",
         "FilterPattern": "?\"REPORT RequestId: \" ?\"SERVERLESS_ENTERPRISE\"",
         "LogGroupName": {
           "Ref": "GraphqlLogGroup"
@@ -569,7 +569,7 @@
     "CloudWatchLogsSubscriptionFilterApiGatewayLogGroup": {
       "Type": "AWS::Logs::SubscriptionFilter",
       "Properties": {
-        "DestinationArn": "arn:aws:logs:us-east-1:802587217904:destination:JvN1BxTcm1PsgZt5qd#BwJkbtglSw03r79MnR#apollo-lambda#dev",
+        "DestinationArn": "arn:aws:logs:eu-central-1:802587217904:destination:JvN1BxTcm1PsgZt5qd#BwJkbtglSw03r79MnR#apollo-lambda#production",
         "FilterPattern": "\"SLS_ACCESS_LOG\"",
         "LogGroupName": {
           "Ref": "ApiGatewayLogGroup"
@@ -594,7 +594,7 @@
     "GraphqlLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GraphqlLambdaVersionZChKucrKD9PaF0waDq68FoGwXoGdNuF2w7IHNvk74"
+        "Ref": "GraphqlLambdaVersionS8xbQdOEIKsdpufbjF9CveOIIk6WKdVYzm2hmZjc"
       }
     },
     "ServiceEndpoint": {
@@ -615,7 +615,7 @@
             {
               "Ref": "AWS::URLSuffix"
             },
-            "/dev"
+            "/production"
           ]
         ]
       }

@@ -1,4 +1,5 @@
-import { ApolloServer, gql } from 'apollo-server';
+import { ApolloServer, gql } from 'apollo-server-lambda';
+
 import { ArticlesAPI } from './data-sources/articles';
 
 const typeDefs = gql`
@@ -33,4 +34,9 @@ const server = new ApolloServer({
   })
 });
 
-server.listen();
+exports.graphqlHandler = server.createHandler({
+  cors: {
+    origin: '*',
+    credentials: false
+  }
+});
