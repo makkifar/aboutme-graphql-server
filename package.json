@@ -7,7 +7,6 @@
     "start:dev": "nodemon",
     "start": "npm run build && node build/index.js",
     "build": "rimraf ./build && tsc",
-    "deploy": "S3_BUCKET=lambda-deploy-asln ./bin/deploy",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint . --ext .ts"
   },
