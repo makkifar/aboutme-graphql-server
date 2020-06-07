@@ -1,4 +1,5 @@
-import { ApolloServer, gql } from 'apollo-server';
+import { ApolloServer, gql } from 'apollo-server-lambda';
+
 import { ArticlesAPI } from './data-sources/articles';
 
 const typeDefs = gql`
@@ -30,7 +31,31 @@ const server = new ApolloServer({
   resolvers,
   dataSources: () => ({
     articlesAPI: new ArticlesAPI()
-  })
+  }),
+  playground: {
+    endpoint: '/dev/graphql'
+  }
 });
 
-server.listen();
+exports.graphqlHandler = server.createHandler();
+
+// Construct a schema, using GraphQL schema language
+// const typeDefs = gql`
+//   type Query {
+//     hello: String
+//   }
+// `;
+
+// // Provide resolver functions for your schema fields
+// const resolvers = {
+//   Query: {
+//     hello: () => 'Hello world!'
+//   }
+// };
+
+// const server = new ApolloServer({
+//   typeDefs,
+//   resolvers
+// });
+
+// exports.graphqlHandler = server.createHandler();

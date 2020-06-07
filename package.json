@@ -7,6 +7,7 @@
     "start:dev": "nodemon",
     "start": "npm run build && node build/index.js",
     "build": "rimraf ./build && tsc",
+    "deploy": "S3_BUCKET=lambda-deploy-asln ./bin/deploy",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint . --ext .ts"
   },
@@ -15,7 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "apollo-datasource-rest": "^0.9.2",
-    "apollo-server": "^2.14.2",
+    "apollo-server-lambda": "^2.14.2",
     "graphql": "^15.0.0"
   },
   "devDependencies": {
@@ -25,6 +26,7 @@
     "@types/node": "^14.0.6",
     "@typescript-eslint/eslint-plugin": "^3.0.2",
     "@typescript-eslint/parser": "^3.0.2",
+    "apollo-server-types": "^0.5.0",
     "eslint": "^7.1.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.3",
@@ -33,7 +35,8 @@
     "nodemon": "^2.0.4",
     "prettier": "^2.0.5",
     "rimraf": "^3.0.2",
+    "serverless-plugin-typescript": "^1.1.9",
     "ts-node": "^8.10.2",
-    "typescript": "^3.9.3"
+    "typescript": "^3.9.5"
   }
 }
