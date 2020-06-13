@@ -22,3 +22,6 @@ functions:
           path: graphql
           method: get
           cors: true
+package:
+  include:
+    - config
