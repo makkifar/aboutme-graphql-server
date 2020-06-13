@@ -1,9 +1,10 @@
 import { RESTDataSource } from 'apollo-datasource-rest';
+import config from 'config';
 
 export class ArticlesAPI extends RESTDataSource {
   constructor() {
     super();
-    this.baseURL = 'http://35.159.24.76:1337/';
+    this.baseURL = config.get('articlesAPI.url');
   }
 
   async getArticle(articleId: string) {
